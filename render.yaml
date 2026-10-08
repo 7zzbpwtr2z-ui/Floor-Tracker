@@ -1,0 +1,33 @@
+services:
+  - type: web
+    name: floor-tracker
+    runtime: node
+    plan: starter          # disks are not available on the free plan
+    buildCommand: "echo no build needed"
+    startCommand: npm start
+    healthCheckPath: /api/config
+    disk:
+      name: floor-tracker-data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: NODE_ENV
+        value: production
+      - key: TRUST_PROXY
+        value: "1"
+      - key: DATA_DIR
+        value: /data
+      - key: COMPANY_NAME
+        sync: false
+      - key: OFFICE_PHONE
+        sync: false
+      - key: PUBLIC_URL
+        sync: false
+      - key: ADMIN_NAME
+        sync: false
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
